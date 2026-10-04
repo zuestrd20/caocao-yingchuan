@@ -1,5 +1,5 @@
 {
-  "license": "Original artwork; created for this project. No third-party artwork used.",
+  "license": "Newly generated character illustrations and original code-drawn terrain. No extracted original-game artwork.",
   "terrain_size": [
     32,
     32
@@ -38,13 +38,13 @@
   ],
   "unit_sheet_frames": [
     "idle",
-    "idle_glint",
-    "hit"
+    "idle_reserved",
+    "idle_reserved"
   ],
   "units": {
     "caocao": {
       "display_name": "曹操",
-      "mounted": true,
+      "mounted": false,
       "weapon": "sword"
     },
     "blue_soldier": {
@@ -59,7 +59,7 @@
     },
     "guanyu": {
       "display_name": "关羽",
-      "mounted": true,
+      "mounted": false,
       "weapon": "glaive"
     },
     "zhangfei": {
@@ -82,5 +82,10 @@
       "mounted": false,
       "weapon": "sword"
     }
-  }
+  },
+  "style": "chibi",
+  "character_source": "sources/chibi/characters.png",
+  "character_layout": "sources/chibi/layout.json",
+  "character_pipeline": "python3 tools/import_chibi_art.py",
+  "character_generation": "OpenAI built-in image_gen; deterministic component extraction, alpha trim, uniform downsample, and atlas packing only"
 }

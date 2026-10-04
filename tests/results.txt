@@ -13,3 +13,6 @@ WIND REVIEW PASS duplicate input, resource, commit, no-counter and restart
 Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
 
 REVIEW PASS 4811 assertions
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+CHARACTER RESOURCE PASS 99 checks; all phases, wounded/casting and restart

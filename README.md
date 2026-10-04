@@ -52,9 +52,12 @@
 
 - `scripts/battle.gd`：資料、路徑、戰鬥、AI、勝負規則。
 - `scripts/main.gd`：原創介面、動畫、操作、音效與教學。
-- `tools/generate_art.py`：Pillow 原創像素素材生成器。
+- `tools/import_chibi_art.py`：把生成式圖像工具製作的 Q 版角色原圖，等比例裁切、縮小與打包；不會繪製替代角色。
+- `tools/generate_art.py`：原始地形與舊版像素素材生成器；已加保護，不能覆蓋新版角色。
+- `tools/build_release.sh`：驗證素材、匯入 Godot、執行測試，再產生 Windows / Linux / Web 與原始碼 ZIP。
 - `tools/subset_font.py`：由系統 Noto CJK 字體產生本專案中文字集。
-- `assets/`：隨專案附帶的圖像与字體；所有遊戲圖像均由上述生成器原創。
+- `assets/`：隨專案附帶的圖像與字體；地形為程式繪製，八組人物頭像及戰場人物已換為全新 Q 版插畫。
+- `assets/sources/chibi/`：保留生成式圖像工具輸出的透明原圖、提示詞與人物對應資料；僅在原始碼包中附帶，不加入遊戲執行包。
 - `FONT_LICENSE.txt`：Noto CJK 的 SIL Open Font License。
 - `tests/test_battle.gd`：確定性規則測試與完整回合模擬。
 
@@ -65,6 +68,8 @@ godot --headless --path . --editor --import --quit
 godot --headless --path . --script tests/test_battle.gd
 godot --headless --path . --script tests/test_restart.gd
 godot --headless --path . --script tests/test_wind_ui.gd
+godot --headless --path . --script tests/test_paths.gd
+godot --headless --path . --script tests/test_character_assets.gd
 ```
 
 測試涵蓋軍隊數量、北門可達、河川與柵欄不可通行、禁止二次移動、撤回、豆消耗、攻擊承諾、雙將勝利、曹操敗退、20 回合失敗。完整正常初始戰鬥以合法移動和攻擊逐回合模擬獲勝；另以 1 HP 的明確 QA 夾具驗證真實反擊導致敗退，不以直接設定勝敗旗標代替。夾具不影響正常遊戲初始資料。
@@ -74,3 +79,18 @@ godot --headless --path . --script tests/test_wind_ui.gd
 此參數略過開場，等待兩幀後存圖並結束。無圖形後端的 headless 模式不適合截圖。
 
 Windows、Linux、Web 使用同一套程式，Web 不需要 SharedArrayBuffer 或跨來源隔離。Windows 匯出為 x86_64；目前的執行驗證以 Linux / Godot 為主，Windows 匯出不代表已在 Windows 實機跑過。
+
+## Q 版人物美術
+
+曹操、劉備、關羽、張飛、張梁、張寶、官軍與黃巾兵，各有一張頭像和透明背景戰場人物。人物使用大頭小身、深色輪廓與彩繪陰影；保留角色的帽飾、鬍鬚、兵器與陣營配色。新版曹操、關羽採站姿造型，只更換美術，不更動移動力、地圖或任何戰鬥規則。
+
+原圖由 OpenAI 內建圖像生成工具製作，未擷取原作遊戲素材。`assets/ART_README.md` 記錄來源與完整重建方法。重新整理素材需 Python、Pillow、NumPy、SciPy：
+
+```sh
+python3 -m pip install -r tools/requirements-art.txt
+python3 tools/import_chibi_art.py
+python3 tools/import_chibi_art.py --check
+bash tools/build_release.sh ../caocao_deliverables
+```
+
+舊像素素材僅可輸出至獨立目錄作參考：`python3 tools/generate_art.py --output-dir /tmp/yingchuan-legacy`。一般遊戲執行不需 Python。

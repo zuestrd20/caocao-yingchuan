@@ -1,0 +1,75 @@
+{
+  "style": "chibi",
+  "source_tool": "OpenAI built-in image_gen",
+  "items": {
+    "portraits": {
+      "caocao": {
+        "source": "characters.png",
+        "component": 4
+      },
+      "liubei": {
+        "source": "characters.png",
+        "component": 2
+      },
+      "guanyu": {
+        "source": "characters.png",
+        "component": 3
+      },
+      "zhangfei": {
+        "source": "characters.png",
+        "component": 1
+      },
+      "zhangliang": {
+        "source": "characters.png",
+        "component": 5
+      },
+      "zhangbao": {
+        "source": "characters.png",
+        "component": 6
+      },
+      "blue_soldier": {
+        "source": "characters.png",
+        "component": 7
+      },
+      "yellow_soldier": {
+        "source": "characters.png",
+        "component": 8
+      }
+    },
+    "units": {
+      "caocao": {
+        "source": "characters.png",
+        "component": 10
+      },
+      "liubei": {
+        "source": "characters.png",
+        "component": 12
+      },
+      "guanyu": {
+        "source": "characters.png",
+        "component": 9
+      },
+      "zhangfei": {
+        "source": "characters.png",
+        "component": 11
+      },
+      "zhangliang": {
+        "source": "characters.png",
+        "component": 14
+      },
+      "zhangbao": {
+        "source": "characters.png",
+        "component": 15
+      },
+      "blue_soldier": {
+        "source": "characters.png",
+        "component": 16
+      },
+      "yellow_soldier": {
+        "source": "characters.png",
+        "component": 13
+      }
+    }
+  },
+  "extraction": "Connected components of alpha >127, retain components >1000 pixels, scan order IDs; original alpha within 3px nearest-core ownership. Avoids overlapping row bounding boxes."
+}

@@ -5,9 +5,14 @@ Run with Python 3 + Pillow. Nearest-neighbour rendering is intentional.
 """
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
-import random, json, math
+import random, json, math, argparse
 ROOT=Path(__file__).resolve().parents[1]
-A=ROOT/'assets'
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--output-dir', type=Path, help='Generate the legacy pixel pack into a separate directory for reference.')
+args=parser.parse_args()
+A=args.output_dir.resolve() if args.output_dir else ROOT/'assets'
+if (A/'sources'/'chibi'/'layout.json').exists():
+ raise SystemExit('Protected Q-version character artwork: run tools/import_chibi_art.py to rebuild it. To inspect the legacy pixel pack, use --output-dir /tmp/yingchuan-legacy (not assets).')
 for sub in ('terrain','units','portraits','previews'):(A/sub).mkdir(exist_ok=True,parents=True)
 P={
  'ink':'#20282c','deep':'#263f36','grass':'#788653','g1':'#89955d','g2':'#647347','g3':'#9ba369','g4':'#bac080',
